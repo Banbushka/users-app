@@ -1,5 +1,21 @@
 # users-app
 
+# Dockerfile
+
+Para crear un contenedor con este Dockerfile hay que situarse en la carpeta raiz y hacer los siguientes comandos:
+
+Crear la imagen:
+
+    docker build  -t <usuario>/<nombre_de_la_app>:version_de_la_imagen>  .
+
+Crear la variable de entorno en bash que contiene nuestra llave para conectarnos a MongoDB (los pasos para generarla están más abajo en este README)
+    
+    export MONGO=mongodb+srv://<username>:<password>@cluster0.2lnyz2p.mongodb.net/<table> 
+
+Correr el contenedor:
+
+    docker run -e DB_URL_ATLAS=$MONGO -p 3000:3000 -p 5173:5173 <usuario>/<nombre_de_la_app>:version_de_la_imagen>
+
 # Creación de usuarios con MERN Full Stack
 
 Este es un proyecto construido utilizando la pila MERN Full Stack, que incluye MongoDB, Express, React y Node.js. MongoDB se utiliza como la base de datos y Mongoose se utiliza para interactuar con ella. Mongoose proporciona una interfaz simple y fácil de usar para realizar operaciones CRUD en la base de datos.
