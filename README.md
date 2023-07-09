@@ -14,7 +14,7 @@ Crear la variable de entorno en bash que contiene nuestra llave para conectarnos
 
 Correr el contenedor:
 
-    docker run -e DB_URL_ATLAS=$MONGO -p 3000:3000 -p 5173:5173 <usuario>/<nombre_de_la_app>:version_de_la_imagen>
+    docker run -e DB_URL_ATLAS=$MONGO -p 3000:3000 -p 5173:5173 <usuario>/<nombre_de_la_app>:<version_de_la_imagen>
 
 # Creación de usuarios con MERN Full Stack
 
