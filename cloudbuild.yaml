@@ -1,0 +1,7 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/my_image:$COMMIT_SHA', '--build-arg', 'DB_URL_ATLAS=${_DB_URL_ATLAS}', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/my_image:$COMMIT_SHA']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 'my-app', '--image', 'gcr.io/$PROJECT_ID/my_image:$COMMIT_SHA', '--platform', 'managed', '--region', 'eu-west1', '--set-env-vars', 'DB_URL_ATLAS=$DB_URL_ATLAS']
