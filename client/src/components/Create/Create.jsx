@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const backendUrl = 'https://mi-servicio-nodegabi-cr4nmchclq-ew.a.run.app';
+const backendUrl = 'https://mi-servicio-nodegabi-cr4nmchclq-ew.a.run.app'
 
 function Create() {
   const [id, setId] = useState("");
