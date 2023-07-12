@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
-const backendUrl = 'https://mi-servicio-nodegabi-cr4nmchclq-ew.a.run.app'
+const backendUrl = 'https://mi-servicio-nodegabi-cr4nmchclq-ew.a.run.app:3000';
 const UserContext = createContext();
 
 

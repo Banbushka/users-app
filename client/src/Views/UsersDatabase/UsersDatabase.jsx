@@ -3,7 +3,7 @@ import axios from "axios";
 import UserCard from "../../components/UserCard/UserCard";
 import { Link } from "react-router-dom";
 
-const backendUrl = 'https://mi-servicio-nodegabi-cr4nmchclq-ew.a.run.app';
+const backendUrl = 'https://mi-servicio-nodegabi-cr4nmchclq-ew.a.run.app:3000';
 
 function UsersDatabase() {
   const [users, setUsers] = useState([]);
