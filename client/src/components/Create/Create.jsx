@@ -21,7 +21,7 @@ function Create() {
 
     try {
       const response = await axios.post(
-        "/api/users/create",
+        "cluster0.17omynw.mongodb.net/api/users/create",
         newUser
       );
       console.log("Usuario creado exitosamente");
