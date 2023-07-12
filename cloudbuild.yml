@@ -17,12 +17,12 @@ steps:
     args: [
         "-c",
         "gcloud run deploy mi-servicio-nodegabi 
-        - --image=gcr.io/bootcamp-thebridgecloud/nodegabi
-        - --region=europe-west1
-        - --platform=managed
-        - --allow-unauthenticated
-        - --port=3000
-        - --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS"
+        --image=gcr.io/bootcamp-thebridgecloud/nodegabi
+        --region=europe-west1
+        --platform=managed
+        --allow-unauthenticated
+        --port=3000
+        --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS"
     ]
     secretEnv: [
       'DB_URL_ATLAS'
