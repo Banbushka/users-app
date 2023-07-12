@@ -23,7 +23,7 @@ steps:
         --allow-unauthenticated
         --port=5173
         --vpc-connector=default
-        --voc.egress=all
+        --vpc-egress=all
         --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS"
     ]
     secretEnv: [
