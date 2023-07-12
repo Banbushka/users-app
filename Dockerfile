@@ -13,7 +13,7 @@ RUN cd server &&  npm install & cd ..
 RUN cd client && npm install
 
 # Variable prueba
-
+ENV DB_URL_ATLAS
 
 # Expose ports
 EXPOSE 3000
