@@ -20,7 +20,7 @@ app.use(morgan('combined'))
 app.use(cors());
 
 //Rutas 
-app.use('/', express.static(path.join(__dirname, 'client')));
+
 
 app.get('/',(req,res)=>{
     res.json({msj: `Bienvenido. Usa las siguientes rutas para obtener información sobre usuarios: http://localhost:${port}/api/users`})
