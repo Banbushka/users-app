@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+const backendUrl = 'https://mi-servicio-nodegabi-cr4nmchclq-ew.a.run.app';
+
 function Create() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -19,7 +21,7 @@ function Create() {
 
     try {
       const response = await axios.post(
-        "/api/users/create",
+        "${backendUrl}/api/users/create",
         newUser
       );
       console.log("Usuario creado exitosamente");

@@ -21,7 +21,7 @@ app.use(cors());
 
 //Rutas 
 
-app.get('/api/users',(req,res)=>{
+app.get('/',(req,res)=>{
     res.json({msj: `Bienvenido. Usa las siguientes rutas para obtener información sobre usuarios: http://localhost:${port}/api/users`})
 })
 
