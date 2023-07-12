@@ -22,5 +22,11 @@ steps:
         - --platform=managed
         - --allow-unauthenticated
         - --port=5173
-        - --update-env-vars
-        - DB_URL_ATLAS=mongodb+srv://crow262728:diego123@cluster0.17omynw.mongodb.net/mongoenlanube
+    secretEnv: ['DB_URL_ATLAS']
+
+  availableSecrets:
+    secretManager:
+    - versionName: projects/bootcamp-thebridgecloud/secrets/mongo/latest
+      env: DB_URL_ATLAS
+        #- --update-env-vars
+       # - DB_URL_ATLAS=mongodb+srv://crow262728:diego123@cluster0.17omynw.mongodb.net/mongoenlanube
