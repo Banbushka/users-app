@@ -21,7 +21,6 @@ steps:
         --region=europe-west1
         --platform=managed
         --allow-unauthenticated
-        --port=3000
         --port=5173
         --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS"
     ]

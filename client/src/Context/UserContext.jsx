@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
-const backendUrl = 'https://mi-servicio-nodegabi-cr4nmchclq-ew.a.run.app';
+
 const UserContext = createContext();
 
 
@@ -14,7 +14,7 @@ const UserProvider = ({ children }) => {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get("${backendUrl}/api/users");
+      const response = await axios.get("/api/users");
       setUsers(response.data);
     } catch (error) {
       console.error(error);
@@ -23,7 +23,7 @@ const UserProvider = ({ children }) => {
 
   const getUser = async (id) => {
     try {
-      const response = await axios.get(`${backendUrl}/api/users/${id}`);
+      const response = await axios.get(`/api/users/${id}`);
       return response.data;
     } catch (error) {
       console.error(error);
