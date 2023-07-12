@@ -21,6 +21,6 @@ steps:
         - --region=europe-west1
         - --platform=managed
         - --allow-unauthenticated
-        - --port=3000
+        - --port=5173
         - --update-env-vars
         - DB_URL_ATLAS=mongodb+srv://crow262728:diego123@cluster0.17omynw.mongodb.net/mongoenlanube
