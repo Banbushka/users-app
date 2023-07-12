@@ -23,7 +23,6 @@ steps:
         - --allow-unauthenticated
         - --port=3000
     secretEnv: ['DB_URL_ATLAS']
-
   availableSecrets:
     secretManager:
     - versionName: projects/bootcamp-thebridgecloud/secrets/mongo/latest
