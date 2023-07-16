@@ -66,7 +66,7 @@ steps:
     args: [ 'push', 'gcr.io/bootcamp-thebridgecloud/nodegabiclient' ]
 
   # Implementa la imagen de la aplicación web en Cloud Run y pasa la URL del servidor como variable de entorno
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: bash
     args: [
         '-c',
