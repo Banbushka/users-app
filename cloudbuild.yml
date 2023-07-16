@@ -3,31 +3,6 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['config', 'set', 'project', 'bootcamp-thebridgecloud']
 
-  # Construye la imagen del contenedor
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/bootcamp-thebridgecloud/nodegabiserver', './server']
-
-  # Sube la imagen al Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/bootcamp-thebridgecloud/nodegabiserver']
-
-  # Implementa la imagen en Cloud Run
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: bash
-    args: [
-        "-c",
-        "gcloud run deploy mi-servicio-server 
-        --image=gcr.io/bootcamp-thebridgecloud/nodegabiserver
-        --region=europe-west1
-        --platform=managed
-        --allow-unauthenticated
-        --port=3000
-        --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS"
-    ]
-    secretEnv: [
-      'DB_URL_ATLAS'
-    ]
-
   # Construye la imagen de la aplicación web
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'build', '-t', 'gcr.io/bootcamp-thebridgecloud/webnode', './client' ]
