@@ -14,7 +14,7 @@ function UsersDatabase() {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get("34.34.170.132:3000/api/users");
+      const response = await axios.get("${SERVER_URL}/api/users");
       setUsers(response.data);
     } catch (error) {
       console.error(error);
