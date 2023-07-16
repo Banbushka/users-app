@@ -22,22 +22,31 @@ steps:
         --platform=managed
         --allow-unauthenticated
         --port=3000
-        --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS
-        --format=value(status.url)"
+        --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS"
     ]
     secretEnv: [
       'DB_URL_ATLAS'
     ]
 
-  # Obtén la URL del servidor desplegado y almacénala en un archivo
+  # Obtiene la URL del servidor desplegado
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: get-server-url
+    args: [
+      'run', 'services', 'describe', 'mi-servicio-server',
+      '--region=europe-west1',
+      '--format=value(status.url)',
+      '--platform=managed'
+    ]
+
+  # Almacena la URL del servidor en una variable
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: bash
     args: [
       '-c',
-      'gcloud run services describe mi-servicio-server 
-      --region=europe-west1 
-      --format=value(status.url) > /workspace/server-url.txt'
+      'export SERVER_URL=$(cat ${_GET_SERVER_URL_OUTPUT_FILE})'
     ]
+    env:
+      - '_GET_SERVER_URL_OUTPUT_FILE=/workspace/server-url.txt'
 
   # Lee la URL del servidor desde el archivo
   - name: 'gcr.io/cloud-builders/gcloud'
