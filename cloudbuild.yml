@@ -53,8 +53,8 @@ steps:
     id: read-server-url
     entrypoint: bash
     args: [
-          '-c',
-          'EXPORT SERVER_URL=$(cat /workspace/server-url.txt)'
+          '-c', "ls /workspace"
+          'export SERVER_URL=$(cat /workspace/server-url.txt)'
         ]
 
   # Construye la imagen de la aplicación web
