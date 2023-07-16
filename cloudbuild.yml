@@ -39,13 +39,14 @@ steps:
       --format=value(status.url) > /workspace/server-url.txt'
     ]
 
-  # Actualiza las variables de entorno con la URL del servidor
+  # Lee la URL del servidor desde el archivo
   - name: 'gcr.io/cloud-builders/gcloud'
+    id: read-server-url
     entrypoint: bash
     args: [
-      '-c',
-      'echo "SERVER_URL=$SERVER_URL" >> /workspace/server-url.txt'
-    ]
+          '-c',
+          'export SERVER_URL=$(cat /workspace/server-url.txt)'
+        ]
 
   # Construye la imagen de la aplicación web
   - name: 'gcr.io/cloud-builders/docker'
