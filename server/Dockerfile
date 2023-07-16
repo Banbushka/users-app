@@ -11,5 +11,6 @@ COPY . ./server
 RUN cd server && npm install
 
 EXPOSE 3000
+
 # Iniciar el servidor
 CMD ["sh", "-c", "cd server && npm start"]

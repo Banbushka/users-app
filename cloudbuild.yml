@@ -5,19 +5,47 @@ steps:
 
   # Construye la imagen de la aplicación web
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'gcr.io/bootcamp-thebridgecloud/webnode', './client' ]
+    args: [ 'build', '-t', 'gcr.io/bootcamp-thebridgecloud/nodegabiserver', './server' ]
+
+  # Sube la imagen al Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', 'gcr.io/bootcamp-thebridgecloud/nodegabiserver' ]
+
+  # Implementa la imagen en Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: bash
+    args: [
+      "-c",
+      "gcloud run deploy mi-servicio-server 
+        --image=gcr.io/bootcamp-thebridgecloud/nodegabiserver
+        --region=europe-west1
+        --platform=managed
+        --allow-unauthenticated
+        --port=3000
+        --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS"
+    ]
+    secretEnv: [
+      'DB_URL_ATLAS'
+    ]
+
+  # Construye la imagen de la aplicación web
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'gcr.io/bootcamp-thebridgecloud/nodegabiclient', './client' ]
 
   # Implementa la imagen de la aplicación web en Cloud Run y pasa la URL del servidor como variable de entorno
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: bash
     args: [
         '-c',
         "gcloud run deploy mi-servicio-client 
-        --image=gcr.io/bootcamp-thebridgecloud/webnode 
+        --image=gcr.io/bootcamp-thebridgecloud/nodegabiclient
         --region=europe-west1  
         --platform=managed 
         --allow-unauthenticated  
         --port=5173"
     ]
 
-
+availableSecrets:
+  secretManager:
+    - versionName: projects/180585318088/secrets/mongo/versions/latest
+      env: DB_URL_ATLAS
