@@ -5,28 +5,55 @@ steps:
 
   # Construye la imagen del contenedor
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/bootcamp-thebridgecloud/nodegabi', '.']
+    args: ['build', '-t', 'gcr.io/bootcamp-thebridgecloud/nodegabiserver', './server']
 
   # Sube la imagen al Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/bootcamp-thebridgecloud/nodegabi']
+    args: ['push', 'gcr.io/bootcamp-thebridgecloud/nodegabiserver']
 
   # Implementa la imagen en Cloud Run
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: bash
     args: [
         "-c",
-        "gcloud run deploy mi-servicio-nodegabi 
-        --image=gcr.io/bootcamp-thebridgecloud/nodegabi
+        "gcloud run deploy mi-servicio-server 
+        --image=gcr.io/bootcamp-thebridgecloud/nodegabiserver
         --region=europe-west1
         --platform=managed
         --allow-unauthenticated
-        --port=5173
+        --port=3000
         --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS"
     ]
     secretEnv: [
       'DB_URL_ATLAS'
     ]
+  # Obtiene la URL del servidor desplegado
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: get-server-url
+    entrypoint: bash
+    args: [
+      '-c',
+      'echo "SERVER_URL=$(gcloud run services describe mi-servicio-nodegabiserver --region=europe-west1 --format=value(status.url))" >> $KUBE_ENV'
+    ]
+
+  # Construye la imagen de la aplicación web
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'gcr.io/bootcamp-thebridgecloud/nodegabiclient', './client' ]
+
+  # Implementa la imagen de la aplicación web en Cloud Run y pasa la URL del servidor como variable de entorno
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: bash
+    args: [
+          '-c',
+          "gcloud run deploy mi-servicio-client 
+          --image=gcr.io/bootcamp-thebridgecloud/nodegabiclient  
+          --region=europe-west1  
+          --platform=managed 
+          --allow-unauthenticated  
+          --port=5173 
+          --update-env-vars=SERVER_URL=$SERVER_URL"
+        ]
+
 availableSecrets:
   secretManager:
     - versionName: projects/180585318088/secrets/mongo/versions/latest
