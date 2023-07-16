@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const url = process.env.SERVER_URL_CLIENT;
+const backendUrl = process.env.SERVER_URL_CLIENT;
 function Create() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -20,7 +20,7 @@ function Create() {
 
     try {
       const response = await axios.post(
-        `${url}/api/users/create`,
+        `${backendUrl}/api/users/create`,
         newUser
       );
       console.log("Usuario creado exitosamente");
