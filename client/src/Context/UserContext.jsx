@@ -14,7 +14,7 @@ const UserProvider = ({ children }) => {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get("${SERVER_URL}/api/users");
+      const response = await axios.get("${process.env.SERVER_URL}/api/users");
       setUsers(response.data);
     } catch (error) {
       console.error(error);
@@ -23,7 +23,7 @@ const UserProvider = ({ children }) => {
 
   const getUser = async (id) => {
     try {
-      const response = await axios.get(`${SERVER_URL}/api/users/${id}`);
+      const response = await axios.get(`${process.env.SERVER_URL}/api/users/${id}`);
       return response.data;
     } catch (error) {
       console.error(error);
