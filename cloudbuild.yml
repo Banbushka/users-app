@@ -20,8 +20,4 @@ steps:
         --port=5173"
     ]
 
-availableSecrets:
-  secretManager:
-    - versionName: projects/180585318088/secrets/mongo/versions/latest
-      env: DB_URL_ATLAS
 
