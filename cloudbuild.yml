@@ -53,7 +53,7 @@ steps:
     id: read-server-url
     entrypoint: bash
     args: [
-          '-c',
+          '-c', 'pwd',
           'export SERVER_URL=$(cat /workspace/server-url.txt)'
         ]
 
