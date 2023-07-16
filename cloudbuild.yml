@@ -28,25 +28,6 @@ steps:
       'DB_URL_ATLAS'
     ]
 
-  # Obtén la URL del servidor desplegado y almacénala en un archivo
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: bash
-    args: [
-      '-c',
-      'gcloud run services describe mi-servicio-server 
-      --region=europe-west1 
-      --format=value(status.url) 
-      > /workspace/server-url.txt'
-    ]
-
-  # Actualiza las variables de entorno con la URL del servidor
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: bash
-    args: [
-      '-c',
-      'echo "SERVER_URL=$(cat /workspace/server-url.txt)" >> /workspace/server-url.txt'
-    ]
-
   # Construye la imagen de la aplicación web
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'build', '-t', 'gcr.io/bootcamp-thebridgecloud/nodegabiclient', './client' ]
@@ -61,8 +42,7 @@ steps:
           --region=europe-west1  
           --platform=managed 
           --allow-unauthenticated  
-          --port=5173 
-          --update-env-vars=SERVER_URL=$$SERVER_URL"
+          --port=5173"
         ]
 
 availableSecrets:
