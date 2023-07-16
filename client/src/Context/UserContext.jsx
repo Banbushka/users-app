@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
-const url = process.env.SERVER_URL;
+const url = process.env.SERVER_URL_CLIENT;
 const UserContext = createContext();
 
 
