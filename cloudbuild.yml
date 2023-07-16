@@ -43,7 +43,7 @@ steps:
     entrypoint: bash
     args: [
       '-c',
-      'export SERVER_URL=$(cat ${_GET_SERVER_URL_OUTPUT_FILE})'
+      'export SERVER_URL=$(cat $${_GET_SERVER_URL_OUTPUT_FILE})'
     ]
     env:
       - '_GET_SERVER_URL_OUTPUT_FILE=/workspace/server-url.txt'
@@ -53,7 +53,7 @@ steps:
     id: read-server-url
     entrypoint: bash
     args: [
-          '-c', "ls /workspace",
+          '-c',
           'export SERVER_URL=$(cat /workspace/server-url.txt)'
         ]
 
