@@ -23,20 +23,29 @@ steps:
         --allow-unauthenticated
         --port=3000
         --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS
-        --format=value(status.url) > /workspace/server-url.txt"
+        --format=value(status.url)"
     ]
     secretEnv: [
       'DB_URL_ATLAS'
     ]
 
-  # Lee la URL del servidor desde el archivo
+  # Obtén la URL del servidor desplegado y almacénala en un archivo
   - name: 'gcr.io/cloud-builders/gcloud'
-    id: read-server-url
     entrypoint: bash
     args: [
-          '-c',
-          'export SERVER_URL=$(cat /workspace/server-url.txt)'
-        ]
+      '-c',
+      'gcloud run services describe mi-servicio-server 
+      --region=europe-west1 
+      --format=value(status.url) > /workspace/server-url.txt'
+    ]
+
+  # Actualiza las variables de entorno con la URL del servidor
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: bash
+    args: [
+      '-c',
+      'echo "SERVER_URL=$SERVER_URL" >> /workspace/server-url.txt'
+    ]
 
   # Construye la imagen de la aplicación web
   - name: 'gcr.io/cloud-builders/docker'
