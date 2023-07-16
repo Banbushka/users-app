@@ -20,7 +20,7 @@ function Create() {
 
     try {
       const response = await axios.post(
-        `${process.env.SERVER_URL}/api/users/create`,
+        `${url}/api/users/create`,
         newUser
       );
       console.log("Usuario creado exitosamente");
