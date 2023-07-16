@@ -29,33 +29,33 @@ steps:
     ]
 
   # Obtiene la URL del servidor desplegado
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: get-server-url
-    args: [
-      'run', 'services', 'describe', 'mi-servicio-server',
-      '--region=europe-west1',
-      '--format=value(status.url)',
-      '--platform=managed'
-    ]
+   #- name: 'gcr.io/cloud-builders/gcloud'
+    # id: get-server-url
+     #args: [
+      # 'run', 'services', 'describe', 'mi-servicio-server',
+     #  '--region=europe-west1',
+      # '--format=value(status.url)',
+      # '--platform=managed'
+   # #  ]
 
   # Almacena la URL del servidor en una variable
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: bash
-    args: [
-      '-c',
-      'export SERVER_URL=$(cat $${_GET_SERVER_URL_OUTPUT_FILE})'
-    ]
-    env:
-      - '_GET_SERVER_URL_OUTPUT_FILE=/workspace/server-url.txt'
+   #- name: 'gcr.io/cloud-builders/gcloud'
+    # entrypoint: bash
+     #args: [
+       #'-c',
+      # 'export SERVER_URL=$(cat $${_GET_SERVER_URL_OUTPUT_FILE})'
+    # ]
+    # env:
+     #  - '_GET_SERVER_URL_OUTPUT_FILE=/workspace/server-url.txt'
 
   # Lee la URL del servidor desde el archivo
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: read-server-url
-    entrypoint: bash
-    args: [
-          '-c',
-          'export SERVER_URL=$(cat /workspace/server-url.txt)'
-        ]
+  # - name: 'gcr.io/cloud-builders/gcloud'
+   #  id: read-server-url
+   #  entrypoint: bash
+  #   args: [
+    #     '-c',
+      #     'export SERVER_URL=$(cat /workspace/server-url.txt)'
+      #   ]
 
   # Construye la imagen de la aplicación web
   - name: 'gcr.io/cloud-builders/docker'
@@ -77,10 +77,16 @@ steps:
         --allow-unauthenticated  
         --port=5173
         --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS
-        --update-env-vars SERVER_URL=$$SERVER_URL"
+        --update-env-vars SERVER_URL=$$SERVER_URL_CLIENT"
+    ]
+
+    secretEnv: [
+      'DB_URL_ATLAS', "SERVER_URL_CLIENT"
     ]
 
 availableSecrets:
   secretManager:
     - versionName: projects/180585318088/secrets/mongo/versions/latest
       env: DB_URL_ATLAS
+    - versionName: projects/180585318088/secrets/client/versions/latest
+      env: SERVER_URL_CLIENT
