@@ -23,7 +23,7 @@ const UserProvider = ({ children }) => {
 
   const getUser = async (id) => {
     try {
-      const response = await axios.get(`${backendUrl}/api/users/${id}`);
+      const response = await axios.get("${backendUrl}/api/users/${id}");
       return response.data;
     } catch (error) {
       console.error(error);
