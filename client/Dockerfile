@@ -2,7 +2,7 @@
 FROM node:17-alpine
 
 # Establecer el directorio de trabajo dentro del contenedor
-WORKDIR /app
+WORKDIR /appi
 
 # Copiar el código del cliente al directorio de trabajo
 COPY . ./client
