@@ -77,7 +77,7 @@ steps:
         --allow-unauthenticated  
         --port=5173
         --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS
-        --update-env-vars SERVER_URL=$$SERVER_URL_CLIENT"
+        --update-env-vars SERVER_URL_CLIENT=$$SERVER_URL_CLIENT"
     ]
 
     secretEnv: [
