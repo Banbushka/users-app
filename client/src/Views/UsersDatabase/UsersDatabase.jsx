@@ -4,7 +4,6 @@ import UserCard from "../../components/UserCard/UserCard";
 import { Link } from "react-router-dom";
 
 
-
 function UsersDatabase() {
   const [users, setUsers] = useState([]);
 
@@ -14,7 +13,7 @@ function UsersDatabase() {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get("${process.env.SERVER_URL}/api/users");
+      const response = await axios.get("http://localhost:3000/api/users");
       setUsers(response.data);
     } catch (error) {
       console.error(error);

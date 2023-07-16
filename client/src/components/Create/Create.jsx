@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-
-
 function Create() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -21,7 +19,7 @@ function Create() {
 
     try {
       const response = await axios.post(
-        `${process.env.SERVER_URL}/api/users/create`,
+        "http://localhost:3000/api/users/create",
         newUser
       );
       console.log("Usuario creado exitosamente");
@@ -36,11 +34,11 @@ function Create() {
   };
 
   return (
-    
+
     <div className="botones">
-      
+
       <form onSubmit={handleSubmit}>
-      
+
         <div>
           <label htmlFor="name">Nombre:</label>
           <input
@@ -64,7 +62,7 @@ function Create() {
 
       {newUser && (
         <div>
-          
+
         </div>
       )}
       <div>
