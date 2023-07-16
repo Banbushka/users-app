@@ -39,15 +39,6 @@ steps:
       'export SERVER_URL=$(cat /workspace/server-url.txt)'
     ]
 
-  # Obtiene la URL del servidor desplegado
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: get-server-url
-    entrypoint: bash
-    args: [
-      '-c',
-      'echo "SERVER_URL=$(gcloud run services describe mi-servicio-nodegabiserver --region=europe-west1 --format=value(status.url))" >> $KUBE_ENV'
-    ]
-
   # Construye la imagen de la aplicación web
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'build', '-t', 'gcr.io/bootcamp-thebridgecloud/nodegabiclient', './client' ]
