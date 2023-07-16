@@ -30,15 +30,15 @@ steps:
 
   # Construye la imagen de la aplicación web
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'gcr.io/bootcamp-thebridgecloud/nodegabiclient', './client' ]
+    args: [ 'build', '-t', 'gcr.io/bootcamp-thebridgecloud/webnode', './client' ]
 
   # Implementa la imagen de la aplicación web en Cloud Run y pasa la URL del servidor como variable de entorno
-  - name: 'gcr.io/cloud-builders/gcloud1'
+  - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: bash
     args: [
         '-c',
         "gcloud run deploy mi-servicio-client 
-        --image=gcr.io/bootcamp-thebridgecloud/nodegabiclient 
+        --image=gcr.io/bootcamp-thebridgecloud/webnode 
         --region=europe-west1  
         --platform=managed 
         --allow-unauthenticated  
