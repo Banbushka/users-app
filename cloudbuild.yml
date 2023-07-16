@@ -33,17 +33,17 @@ steps:
     args: [ 'build', '-t', 'gcr.io/bootcamp-thebridgecloud/nodegabiclient', './client' ]
 
   # Implementa la imagen de la aplicación web en Cloud Run y pasa la URL del servidor como variable de entorno
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: 'gcr.io/cloud-builders/gcloud1'
     entrypoint: bash
     args: [
-          '-c',
-          "gcloud run deploy mi-servicio-client 
-          --image=gcr.io/bootcamp-thebridgecloud/nodegabiclient  
-          --region=europe-west1  
-          --platform=managed 
-          --allow-unauthenticated  
-          --port=5173"
-        ]
+        '-c',
+        "gcloud run deploy mi-servicio-client 
+        --image=gcr.io/bootcamp-thebridgecloud/nodegabiclient 
+        --region=europe-west1  
+        --platform=managed 
+        --allow-unauthenticated  
+        --port=5173"
+    ]
 
 availableSecrets:
   secretManager:
