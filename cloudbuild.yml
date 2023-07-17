@@ -81,7 +81,7 @@ steps:
     ]
 
     secretEnv: [
-      'DB_URL_ATLAS', 'URL_CLIENT'
+      'DB_URL_ATLAS'
     ]
 
 availableSecrets:
