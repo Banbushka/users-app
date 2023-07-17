@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
-const backendUrl = process.env.URL_CLIENT;
+const backendUrl = "https://mi-servicio-server-cr4nmchclq-ew.a.run.app";
 const UserContext = createContext();
 
 

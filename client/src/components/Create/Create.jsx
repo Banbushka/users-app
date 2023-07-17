@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const backendUrl = process.env.URL_CLIENT;
+const backendUrl = "https://mi-servicio-server-cr4nmchclq-ew.a.run.app";
 function Create() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");

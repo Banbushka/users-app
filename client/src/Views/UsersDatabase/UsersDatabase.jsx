@@ -3,7 +3,7 @@ import axios from "axios";
 import UserCard from "../../components/UserCard/UserCard";
 import { Link } from "react-router-dom";
 
-const backendUrl = process.env.URL_CLIENT;
+const backendUrl = "https://mi-servicio-server-cr4nmchclq-ew.a.run.app";
 function UsersDatabase() {
   const [users, setUsers] = useState([]);
 
