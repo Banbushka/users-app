@@ -3,7 +3,7 @@ import axios from "axios";
 import UserCard from "../../components/UserCard/UserCard";
 import { Link } from "react-router-dom";
 
-const backendUrl = process.env.SERVER_URL_CLIENT;
+const backendUrl = process.env.URL_CLIENT;
 function UsersDatabase() {
   const [users, setUsers] = useState([]);
 
