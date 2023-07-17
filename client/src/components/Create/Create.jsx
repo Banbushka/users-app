@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const backendUrl = import.meta.env.SERVER_URL_CLIENT;
+const backendUrl = process.env.SERVER_URL_CLIENT;
 function Create() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");

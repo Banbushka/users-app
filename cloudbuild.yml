@@ -77,11 +77,11 @@ steps:
         --allow-unauthenticated  
         --port=5173
         --update-env-vars DB_URL_ATLAS=$$DB_URL_ATLAS
-        --update-env-vars SERVER_URL_CLIENT=$$SERVER_URL_CLIENT"
+        --update-env-vars URL_CLIENT=$$URL_CLIENT"
     ]
 
     secretEnv: [
-      'DB_URL_ATLAS', "SERVER_URL_CLIENT"
+      'DB_URL_ATLAS', 'URL_CLIENT'
     ]
 
 availableSecrets:
@@ -89,4 +89,4 @@ availableSecrets:
     - versionName: projects/180585318088/secrets/mongo/versions/latest
       env: DB_URL_ATLAS
     - versionName: projects/180585318088/secrets/client/versions/latest
-      env: SERVER_URL_CLIENT
+      env: URL_CLIENT
